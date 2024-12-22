@@ -13,9 +13,7 @@ import retrofit2.Response
 import javax.inject.Inject
 
 @HiltViewModel
-class CountryViewModel @Inject constructor(private val repository: CountryRepository) :
-    ViewModel() {
-
+class CountryViewModel @Inject constructor(private val repository: CountryRepository) : ViewModel() {
 
     private val _countries = mutableStateOf<List<Country>>(emptyList())
     val countries: State<List<Country>> = _countries
@@ -33,6 +31,15 @@ class CountryViewModel @Inject constructor(private val repository: CountryReposi
         loadCountries()
     }
 
+    fun onSearchQueryChanged(query: String) {
+        _searchQuery.value = query
+        if (query.isBlank()) {
+            loadCountries()
+        } else {
+            searchCountriesByName(query)
+        }
+    }
+
     private fun loadCountries() {
         viewModelScope.launch {
             _isLoading.value = true
@@ -40,10 +47,9 @@ class CountryViewModel @Inject constructor(private val repository: CountryReposi
             val response = repository.getAllCountries()
             handleResponse(response)
         }
-
     }
 
-    private fun searchCountries(name: String) {
+    private fun searchCountriesByName(name: String) {
         viewModelScope.launch {
             _isLoading.value = true
             _error.value = null
@@ -51,10 +57,6 @@ class CountryViewModel @Inject constructor(private val repository: CountryReposi
             handleResponse(response)
         }
     }
-
-
-
-
 
     private fun handleResponse(response: Response<List<Country>>) {
         _isLoading.value = false
@@ -64,5 +66,4 @@ class CountryViewModel @Inject constructor(private val repository: CountryReposi
             _error.value = "Error: ${response.code()}"
         }
     }
-
 }
