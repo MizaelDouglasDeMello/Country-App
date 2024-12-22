@@ -1,6 +1,7 @@
 package br.com.mizaeldouglas.country_app
 
 
+import CountryDetailsScreen
 import android.net.Uri
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -20,7 +21,6 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import br.com.mizaeldouglas.country_app.data.model.Country
 import br.com.mizaeldouglas.country_app.ui.theme.CountryAppTheme
-import br.com.mizaeldouglas.country_app.ui.view.CountryDetailsScreen
 import br.com.mizaeldouglas.country_app.ui.view.CountryListScreen
 import com.google.gson.Gson
 import dagger.hilt.android.AndroidEntryPoint
@@ -64,12 +64,9 @@ fun CountryNavHost(navController: NavHostController) {
         ) { backStackEntry ->
             val countryJson = backStackEntry.arguments?.getString("country")
             val country = Gson().fromJson(countryJson, Country::class.java)
-            if (country != null) {
-                CountryDetailsScreen(country = country)
-            } else {
-                Text("Error loading country details")
-            }
+            CountryDetailsScreen(country = country, navController = navController)
         }
+
 
 
     }
