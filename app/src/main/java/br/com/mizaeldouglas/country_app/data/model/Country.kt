@@ -1,7 +1,10 @@
 package br.com.mizaeldouglas.country_app.data.model
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class Country(
     @SerializedName("name") val name: CountryName,
     @SerializedName("capital") val capital: List<String>?,
@@ -11,4 +14,4 @@ data class Country(
     @SerializedName("flags") val flags: CountryFlags,
     @SerializedName("coatOfArms") val coatOfArms: CountryCoatOfArms?,
     @SerializedName("area") val area: Double
-)
+) : Parcelable
