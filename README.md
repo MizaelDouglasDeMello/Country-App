@@ -4,6 +4,16 @@
 
 Este aplicativo Android, construído com Jetpack Compose, busca e exibe informações sobre países da API REST Countries. Os usuários podem navegar por uma lista de países, pesquisar por países específicos e visualizar informações detalhadas sobre cada país, incluindo sua bandeira, brasão, capital, região, população e muito mais.
 
+
+
+
+
+https://github.com/user-attachments/assets/dba16b0c-9e9e-4614-b58a-89ab95985486
+
+
+
+
+
 ## Funcionalidades
 
 *   **Lista de Países:** Exibe uma lista de países obtidos da API REST Countries.
